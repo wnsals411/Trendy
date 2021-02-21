@@ -1,0 +1,13 @@
+<form action="{% url 'notice:write' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% for filed in form %}
+        <div class = "fieldWrapper">
+            {{ filed.errors }}
+            {{ filed.label_tag }} {{ filed }}
+        </div>
+    {% endfor %}
+    <input type="submit" value="OK">
+
+
+</form>

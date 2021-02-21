@@ -1,0 +1,109 @@
+게시글
+{% if q %}
+<h5>'{{ q }}' 검색 결과입니다.</h5>
+{% endif %}
+<table cellspacing=1 width=700 border=1>
+    <thead>
+        <tr class="text-center">
+            <th width=50>번호</th>
+            <th width=320>제목</th>
+            <th width=100>작성자</th>
+            <th width=100>등록일</th>
+            <th width=100>조회수</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if board_list %}
+        {% for board in board_list %}
+        <tr class="text-center">
+            <td><p align=center><a href="{% url 'notice:boadet' board.id %}">{{ board.id }}</p></td>
+            <td><p align=center><a href="{% url 'notice:boadet' board.id %}">{{ board.title|truncatechars:30 }}</p></td>
+            <td><p align=center>{{ board.author }}</p></td>
+            <td><p align=center>{{ board.create_at|date:'Y. m. d' }}</p></td>
+            <td><p align=center>{{ board.hits }}</p></td>
+        </tr>
+        {% endfor %}
+        {% else %}
+            {% if q %}
+            <tr class="text-center">
+                <td colspan="5">
+                    일치하는 검색 결과가 없습니다.
+                </td>
+            </tr>
+            {% else %}
+            <tr class="text-center">
+                <td colspan="5">
+                    작성된 게시글이 없습니다.
+                </td>
+            </tr>
+            {% endif %}
+        {% endif %}
+    </tbody>
+</table>
+<td><input type=button value="글쓰기" OnClick="window.location='/notice/write'"></td>
+
+<div style="margin-top: 30px;">
+    <form action="" method="GET">
+        <div class="col">
+            <div style="float: right;" class="form-row">
+                <div class="form-row">
+                    <div class="col" style="margin-top: 10px;">
+                        <select style="width: 6em;" class="custom-select custom-select-md" name="type">
+                            <option value="all">전체</option>
+                            <option value="title_content">제목+내용</option>
+                            <option value="title">제목</option>
+                            <option value="content">내용</option>
+                            <option value="writer">작성자</option>
+                        </select>
+                    </div>
+                    <div class="col" style="margin-top: 10px;">
+                        <input type="text" name="q" value="{{ q }}" class="form-control form-control-md"
+                            style="width: 15em;" placeholder="검색어를 입력해주세요.">
+                    </div>
+                    <div class="col">
+                        <!-- <button class="btn btn-md btn-outline-dark" type="submit">검색</button> -->
+                        <button class="btn btn-sm" type="submit" id="search_btn">검색</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% if is_paginated %}
+<ul class="pagination">
+    <li>
+        <a class="page-link" href="?type={{ type }}&q={{ q }}&page=1">맨 앞으로</a>
+    </li>
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+        <a class="page-link" href="?type={{ type }}&q={{ q }}&page={{ page_obj.previous_page_number }}"
+            tabindex="-1">이전</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">이전</a>
+    </li>
+    {% endif %}
+
+    {% for page in page_range %}
+    <li class="page-item {% if page == page_obj.number %} activate {% endif %}">
+        <a class="page-link" href="?type={{ type }}&q={{ q }}&page={{ page }}">{{ page }}</a>
+    </li>
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+    <li class="page-item">
+        <a class="page-link"
+            href="?type={{ type }}&q={{ q }}&page={{ page_obj.next_page_number }}">다음</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+        <a class="page-link" href="#">다음</a>
+    </li>
+    {% endif %}
+    <li>
+        <a class="page-link" href="?type={{ type }}&q={{ q }}&page={{ page_obj.paginator.num_pages }}">끝으로</a>
+    </li>
+</ul>
+{% endif %}
+

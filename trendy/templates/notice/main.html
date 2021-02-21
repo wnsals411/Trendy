@@ -1,0 +1,63 @@
+<a href="{% url 'notice:notice' %}"> 공지사항</a>
+    <table cellspacing=1 width=700 border=1>
+    <tr>
+    <td width=50><p align=center>번호</p>
+    </td>
+    <td width=320><p align=center>제목</p>
+    </td>
+    <td width=100><p align=center>닉네임</p>
+    </td>
+    <td width=100><p align=center>등록일</p>
+    </td>
+    <td width=100><p align=center>조회수</p>
+    </td>
+    </tr>
+    
+    {% if NoticeList %}
+    <ul>
+    {% for notice in NoticeList %}
+    <tr>
+    <td width=50><p align=center><a href="{% url 'notice:notdet' notice.id %}">공지</a></p></td>
+    <td width=320><p align=center><a href="{% url 'notice:notdet' notice.id %}">{{ notice.title }}</a></p></td>
+    <td width=100><p align=center>관리자 </p></td>
+    <td width=100><p align=center>{{ notice.create_at }}</p></td>
+    <td width=100><p align=center>{{ notice.hits }}</p></td>
+    </tr>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No Data.</p>
+    {% endif %}
+    </table>
+    ----------------------------------------------------------------------------------------------------------------------------------------
+</br><a href="{% url 'notice:board' %}"> 게시글</a>
+    <table cellspacing=1 width=700 border=1>
+        <tr>
+        <td width=50><p align=center>번호</p>
+        </td>
+        <td width=320><p align=center>제목</p>
+        </td>
+        <td width=100><p align=center>닉네임</p>
+        </td>
+        <td width=100><p align=center>등록일</p>
+        </td>
+        <td width=100><p align=center>조회수</p>
+        </td>
+        </tr>
+
+    {% if BoardList %}
+    <ul>
+    {% for board in BoardList %}
+    <tr>
+    <td width=50><p align=center><a href="{% url 'notice:boadet' board.id %}">{{ board.id }}</a></p></td>
+    <td width=320><p align=center><a href="{% url 'notice:boadet' board.id %}">{{ board.title }}</a></p></td>
+    <td width=100><p align=center>{{ board.author }} </p></td>
+    <td width=100><p align=center>{{ board.create_at }}</p></td>
+    <td width=100><p align=center>{{ board.hits }}</p></td>
+    </tr>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No Data.</p>
+    {% endif %}
+    </table>

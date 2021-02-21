@@ -1,0 +1,13 @@
+<h1>제목 -- {{notice.title}}</h1>
+글번호 -- {{notice.id}}</br>
+글번호 -- {{notice.pk}}</br>
+작성자 -- 관리자</br>
+내용 -- {{notice.content}}</br>
+{% if notice.image %} 이미지 -- <img src ="{{ notice.image.url }}" alt = "{{notice.image}}">  {{board.image}}</br> {% endif %}
+조회수 -- {{notice.hits}}</br>
+등록일 -- {{notice.create_at}}</br>
+
+
+</form>
+<td><input type=button value="List" OnClick="window.location='/notice/notice'"> </td>
+<td><input type=button value="Main" OnClick="window.location='/notice'"> </td>
