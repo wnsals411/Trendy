@@ -13,14 +13,14 @@
         </tr>
     </thead>
     <tbody>
-        {% if board_list %}
-        {% for board in board_list %}
+        {% if qna_list %}
+        {% for qna in qna_list %}
         <tr class="text-center">
-            <td><p align=center><a href="{% url 'notice:boadet' board.id %}">{{ board.id }}</p></td>
-            <td><p align=center><a href="{% url 'notice:boadet' board.id %}">{{ board.title|truncatechars:30 }}</p></td>
-            <td><p align=center>{{ board.author }}</p></td>
-            <td><p align=center>{{ board.create_at|date:'Y. m. d' }}</p></td>
-            <td><p align=center>{{ board.hits }}</p></td>
+            <td><p align=center><a href="{% url 'notice:qnadet' qna.id %}">{{ qna.id }}</p></td>
+            <td><p align=center><a href="{% url 'notice:qnadet' qna.id %}">{{ qna.title|truncatechars:30 }}</p></td>
+            <td><p align=center>{{ qna.author }}</p></td>
+            <td><p align=center>{{ qna.create_at|date:'Y. m. d' }}</p></td>
+            <td><p align=center>{{ qna.hits }}</p></td>
         </tr>
         {% endfor %}
         {% else %}

@@ -1,0 +1,18 @@
+<h1>제목 -- {{qna.title}}</h1>
+작성자 -- {{qna.author}}</br>
+내용 -- {{qna.content}}</br>
+{% if qna.image %} 이미지 -- <img src ="{{ qna.image.url }}" alt = "{{qna.image}}">  {{qna.image}}</br> {% endif %}
+조회수 -- {{qna.hits}}</br>
+등록일 -- {{qna.create_at}}</br>
+
+
+
+<td><form name=searchf method='post' action="{% url 'notice:qnadel' qna.id %}">
+    {% csrf_token %}
+<input type='password' placeholder = '글 작성시 비밀번호' name='password' size=13 maxlength=20>
+<input type=submit value="삭제"></td>
+</form>
+<td><input type=button value="List" OnClick="window.location='/notice/qna'"> </td>
+<td><input type=button value="Main" OnClick="window.location='/notice'"> </td>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}

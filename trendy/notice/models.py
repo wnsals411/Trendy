@@ -19,7 +19,7 @@ class Notice(TimeStamedModel):  # 공지사항용 모델 / admin사이트를 통
     def __str__(self):
         return self.title
 
-class Board(TimeStamedModel):
+class Qna(TimeStamedModel):
     title = models.CharField(max_length = 50) # 글 제목
     author = models.CharField(max_length = 15) # 작성자
     content = models.CharField(max_length = 500) # 내용

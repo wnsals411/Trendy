@@ -1,7 +1,7 @@
 <h1>제목 -- {{notice.title}}</h1>
 작성자 -- 관리자</br>
 내용 -- {{notice.content}}</br>
-{% if notice.image %} 이미지 -- <img src ="{{ notice.image.url }}" alt = "{{notice.image}}">  {{board.image}}</br> {% endif %}
+{% if notice.image %} 이미지 -- <img src ="{{ notice.image.url }}" alt = "{{notice.image}}">  {{notice.image}}</br> {% endif %}
 조회수 -- {{notice.hits}}</br>
 등록일 -- {{notice.create_at}}</br>
 

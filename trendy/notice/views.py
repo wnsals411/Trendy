@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from notice.models import Notice, Board
+from notice.models import Notice, Qna
 from notice.forms import WriteForm
 from django.urls import reverse
 from django.views.generic import ListView
@@ -9,37 +9,37 @@ from django.db.models import Q
 
 def main(request):  # 메인페이지
     Notice_List = Notice.objects.order_by('-id')[0:5] # 공지사항 최신순 5개
-    Board_List = Board.objects.order_by('-id')[0:5] # 게시글 최신순 5개
+    Qna_List = Qna.objects.order_by('-id')[0:5] # 게시글 최신순 5개
 
-    return render(request, 'notice/main.html', {'NoticeList': Notice_List, 'BoardList': Board_List})
+    return render(request, 'notice/main.html', {'NoticeList': Notice_List, 'QnaList': Qna_List})
 
-class BoardListView(ListView): # 게시글
-    model = Board
+class QnaListView(ListView): # 게시글
+    model = Qna
     paginate_by = 10 # 페이지당 게시글 수
-    template_name = 'notice/board.html'  #DEFAULT : <app_label>/<model_name>_list.html
-    context_object_name = 'board_list'        #DEFAULT : <model_name>_list
+    template_name = 'notice/qna.html'  #DEFAULT : <app_label>/<model_name>_list.html
+    context_object_name = 'qna_list'        #DEFAULT : <model_name>_list
 
     def get_queryset(self):
         search_keyword = self.request.GET.get('q', '')
         search_type = self.request.GET.get('type', '')
-        board_list = Board.objects.order_by('-id') 
+        qna_list = Qna.objects.order_by('-id') 
 
         if search_keyword :
             if len(search_keyword) > 0 :    # 1글자 이상 검색 (변경시 get_context_data의 len(search_keyword)도 같이 변경)
                 if search_type == 'all':
-                    search_board_list = board_list.filter(Q (title__icontains=search_keyword) | Q (content__icontains=search_keyword) | Q (author__icontains=search_keyword))
+                    search_qna_list = qna_list.filter(Q (title__icontains=search_keyword) | Q (content__icontains=search_keyword) | Q (author__icontains=search_keyword))
                 elif search_type == 'title_content':
-                    search_board_list = board_list.filter(Q (title__icontains=search_keyword) | Q (content__icontains=search_keyword))
+                    search_qna_list = qna_list.filter(Q (title__icontains=search_keyword) | Q (content__icontains=search_keyword))
                 elif search_type == 'title':
-                    search_board_list = board_list.filter(title__icontains=search_keyword)    
+                    search_qna_list = qna_list.filter(title__icontains=search_keyword)    
                 elif search_type == 'content':
-                    search_board_list = board_list.filter(content__icontains=search_keyword)    
+                    search_qna_list = qna_list.filter(content__icontains=search_keyword)    
                 elif search_type == 'author':
-                    search_board_list = board_list.filter(author__icontains=search_keyword)
+                    search_qna_list = qna_list.filter(author__icontains=search_keyword)
 
-                return search_board_list
+                return search_qna_list
 
-        return board_list
+        return qna_list
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -67,24 +67,24 @@ class BoardListView(ListView): # 게시글
 
         return context
 
-def boadet(request, pk):
-    board = get_object_or_404(Board, id=pk)
-    board.hits += 1
-    board.save()
+def qnadet(request, pk):
+    qna = get_object_or_404(Qna, id=pk)
+    qna.hits += 1
+    qna.save()
 
-    return render(request, 'notice/boadet.html', {'board':board})
+    return render(request, 'notice/qnadet.html', {'qna':qna})
 
-def boadel(request, pk):
+def qnadel(request, pk):
     if request.method == 'POST':
-        board = get_object_or_404(Board, id=pk)
-        if board.password == request.POST['password']:
-            board.delete()
-            return HttpResponseRedirect(reverse('notice:board'))
+        qna = get_object_or_404(Qna, id=pk)
+        if qna.password == request.POST['password']:
+            qna.delete()
+            return HttpResponseRedirect(reverse('notice:qna'))
         else:
-            return render(request, 'notice/boadet.html', {'board':board, 'error_message': "비밀번호 오류"})
+            return render(request, 'notice/qnadet.html', {'qna':qna, 'error_message': "비밀번호 오류"})
     
     elif request.method == 'GET':
-        return HttpResponseRedirect(reverse('notice:boadet', args = (pk,)))
+        return HttpResponseRedirect(reverse('notice:qnadet', args = (pk,)))
 
 
 class NoticeListView(ListView): # 공지사항
@@ -155,7 +155,7 @@ def write(request): # 글 쓰기
         image = request.FILES.get('image')
         password = request.POST['password']
         
-        new_post = Board.objects.create(
+        new_post = Qna.objects.create(
             title = title,
             author = author,
             content = content,
@@ -164,4 +164,4 @@ def write(request): # 글 쓰기
         )
         new_post.save()
             
-        return HttpResponseRedirect(reverse('notice:board'))
+        return HttpResponseRedirect(reverse('notice:qna'))

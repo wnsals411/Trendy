@@ -30,7 +30,7 @@
     {% endif %}
     </table>
     ----------------------------------------------------------------------------------------------------------------------------------------
-</br><a href="{% url 'notice:board' %}"> 게시글</a>
+</br><a href="{% url 'notice:qna' %}"> Q&A</a>
     <table cellspacing=1 width=700 border=1>
         <tr>
         <td width=50><p align=center>번호</p>
@@ -45,15 +45,15 @@
         </td>
         </tr>
 
-    {% if BoardList %}
+    {% if QnaList %}
     <ul>
-    {% for board in BoardList %}
+    {% for qna in QnaList %}
     <tr>
-    <td width=50><p align=center><a href="{% url 'notice:boadet' board.id %}">{{ board.id }}</a></p></td>
-    <td width=320><p align=center><a href="{% url 'notice:boadet' board.id %}">{{ board.title }}</a></p></td>
-    <td width=100><p align=center>{{ board.author }} </p></td>
-    <td width=100><p align=center>{{ board.create_at }}</p></td>
-    <td width=100><p align=center>{{ board.hits }}</p></td>
+    <td width=50><p align=center><a href="{% url 'notice:qnadet' qna.id %}">{{ qna.id }}</a></p></td>
+    <td width=320><p align=center><a href="{% url 'notice:qnadet' qna.id %}">{{ qna.title }}</a></p></td>
+    <td width=100><p align=center>{{ qna.author }} </p></td>
+    <td width=100><p align=center>{{ qna.create_at }}</p></td>
+    <td width=100><p align=center>{{ qna.hits }}</p></td>
     </tr>
     {% endfor %}
     </ul>
@@ -61,3 +61,4 @@
     <p>No Data.</p>
     {% endif %}
     </table>
+    <td><input type=button value="글쓰기" OnClick="window.location='/notice/write'"></td>
