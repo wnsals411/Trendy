@@ -11,7 +11,8 @@ def main(request):  # 메인페이지
     Notice_List = Notice.objects.order_by('-id')[0:5] # 공지사항 최신순 5개
     Qna_List = Qna.objects.order_by('-id')[0:5] # 게시글 최신순 5개
 
-    return render(request, 'notice/main.html', {'NoticeList': Notice_List, 'QnaList': Qna_List})
+    return render(request, 'notice/main.html', {'NoticeList': Notice_List, 'QnaList': Qna_List,
+                                                'NotTotal': Notice.objects.all().count(), 'QnaTotal': Qna.objects.all().count()})
 
 class QnaListView(ListView): # 게시글
     model = Qna
@@ -57,7 +58,7 @@ class QnaListView(ListView): # 게시글
 
         page_range = paginator.page_range[start_index:end_index]
         context['page_range'] = page_range
-
+        context['Total'] = Qna.objects.all().count()
         search_keyword = self.request.GET.get('q', '')
         search_type = self.request.GET.get('type', '')
 
@@ -92,6 +93,7 @@ class NoticeListView(ListView): # 공지사항
     paginate_by = 10
     template_name = 'notice/notice.html'  #DEFAULT : <app_label>/<model_name>_list.html
     context_object_name = 'notice_list'        #DEFAULT : <model_name>_list
+    
 
     def get_queryset(self):
         search_keyword = self.request.GET.get('q', '')
@@ -113,6 +115,8 @@ class NoticeListView(ListView): # 공지사항
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         paginator = context['paginator']
+        context['Total'] = Notice.objects.all().count()
+        
         page_numbers_range = 5
         max_index = len(paginator.page_range)
 
@@ -126,7 +130,6 @@ class NoticeListView(ListView): # 공지사항
 
         page_range = paginator.page_range[start_index:end_index]
         context['page_range'] = page_range
-
         search_keyword = self.request.GET.get('q', '')
         search_type = self.request.GET.get('type', '')
 

@@ -1,4 +1,4 @@
-<a href="{% url 'notice:notice' %}"> 공지사항</a>
+<a href="{% url 'notice:notice' %}"> 공지사항({{NotTotal}})</a>
     <table cellspacing=1 width=700 border=1>
     <tr>
     <td width=50><p align=center>번호</p>
@@ -30,7 +30,7 @@
     {% endif %}
     </table>
     ----------------------------------------------------------------------------------------------------------------------------------------
-</br><a href="{% url 'notice:qna' %}"> Q&A</a>
+</br><a href="{% url 'notice:qna' %}"> Q&A({{QnaTotal}})</a>
     <table cellspacing=1 width=700 border=1>
         <tr>
         <td width=50><p align=center>번호</p>
