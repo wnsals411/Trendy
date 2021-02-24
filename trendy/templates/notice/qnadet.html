@@ -1,11 +1,14 @@
 <h1>제목 -- {{qna.title}}</h1>
 작성자 -- {{qna.author}}</br>
-내용 -- {{qna.content}}</br>
+<div style="white-space:pre;"><c:out value="${content}" />
+내용 
+
+{{qna.content}}
+</div>
+</br>
 {% if qna.image %} 이미지 -- <img src ="{{ qna.image.url }}" alt = "{{qna.image}}">  {{qna.image}}</br> {% endif %}
 조회수 -- {{qna.hits}}</br>
 등록일 -- {{qna.create_at}}</br>
-
-
 
 <td><form name=searchf method='post' action="{% url 'notice:qnadel' qna.id %}">
     {% csrf_token %}

@@ -168,3 +168,6 @@ def write(request): # 글 쓰기
         new_post.save()
             
         return HttpResponseRedirect(reverse('notice:qna'))
+
+def qnanotice(request):
+    return render(request, 'notice/qnanotice.html')
