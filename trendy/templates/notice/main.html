@@ -20,7 +20,7 @@
     <td width=50><p align=center><a href="{% url 'notice:notdet' notice.id %}">공지</a></p></td>
     <td width=320><p align=center><a href="{% url 'notice:notdet' notice.id %}">{{ notice.title }}</a></p></td>
     <td width=100><p align=center>관리자 </p></td>
-    <td width=100><p align=center>{{ notice.create_at }}</p></td>
+    <td width=100><p align=center>{{ notice.create_at|date:'Y. m. d' }}</p></td>
     <td width=100><p align=center>{{ notice.hits }}</p></td>
     </tr>
     {% endfor %}
@@ -52,7 +52,7 @@
     <td width=50><p align=center><a href="{% url 'notice:qnadet' qna.id %}">{{ qna.id }}</a></p></td>
     <td width=320><p align=center><a href="{% url 'notice:qnadet' qna.id %}">{{ qna.title }}</a></p></td>
     <td width=100><p align=center>{{ qna.author }} </p></td>
-    <td width=100><p align=center>{{ qna.create_at }}</p></td>
+    <td width=100><p align=center>{{ qna.create_at|date:'Y. m. d' }}</p></td>
     <td width=100><p align=center>{{ qna.hits }}</p></td>
     </tr>
     {% endfor %}
