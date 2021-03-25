@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>INFOMATION PAGE</title>
+    <style>
+        body {
+            margin: 0 auto;
+        }
+        #wrap {
+            display: flex;
+        }
+        #nav{
+            min-width: 320px;
+            width: 372px;
+            flex-direction: column;
+            padding-left: 0;
+            background: #2b74bf;
+            font-size: 50px;
+            font-family: "Impact";
+            color: rgb(248, 243, 243);
+            z-index: 12;
+        }
+        #subnav{
+            font-size: 48px;
+            font-family: "KoreanSNMB";
+            color: rgb(248, 243, 243);
+        }
+        .themeColor {
+            background-color: #1a4b7e;
+            color: rgba(255, 255, 255, 1);
+            height: 13px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            position: absolute;
+            width: inherit;
+        }
+        #info-container h5{
+            font-size: 72px;
+            font-family:Impact;
+            color: rgb(43, 116, 191);
+            background: white;
+            margin-bottom: 0px;
+            margin-top: 64px;
+            margin-left: 521px;
+            letter-spacing: 14px;
+        }
+        #infos {
+            display: flex;
+        }
+        #info01, #info02, #info03 {
+            border-radius: 5px;
+            background-color: rgb(248, 243, 243);
+            box-shadow: 0px 10px 6.58px 0.42px rgba(0, 0, 0, 0.35);
+            width: 450px;
+            height: 690px;
+            z-index: 15;
+        }
+    </style>
+    <style>
+        #nav h3 {
+            margin: 0;
+            text-align: center;
+            padding-top: 40px;
+
+letter-spacing: 8px;
+        }
+#subnav h5:first-child {
+    padding-top: 20px;
+}
+#subnav h5 {
+    margin: 0;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    letter-spacing: 5px;
+}
+
+
+#subnav a:first-child {
+padding-top: 20px;
+display: block;
+
+font-size: 48px;
+font-family: "KoreanSNMB";
+color: rgb(248, 243, 243);
+text-decoration: none;
+}
+#subnav a {
+margin: 0;
+text-align: center;
+padding-top: 10px;
+padding-bottom: 10px;
+letter-spacing: 5px;
+display: block;
+
+font-size: 48px;
+font-family: "KoreanSNMB";
+color: rgb(248, 243, 243);
+text-decoration: none;
+}
+
+
+        #info01 h3, #info02 h3, #info03 h3{
+            font-size: 22px;
+            font-family: NanumSquareRound;
+            text-align: center;
+            color: #505471;
+            padding-top: 20px;
+            line-height: 1.5;
+        }
+    </style>
+    <style>
+        .text01 {
+            color: #9298be !important;
+        }
+        #selected {
+            background: #1c5294;
+        }
+    </style>
+</head>
+<body>
+<!-- 전체 페이지 -->
+<div id="wrap">
+    <!--좌측 네비게이션 : 파란색 -->
+    <div id="nav">
+        <h3>TRENDY</h3>
+             <div id="subnav">
+                 <a href="{% url 'main:main' %}" class="subNav01">MAIN</a>
+                 <a href="{% url 'info:main' %}" id="selected">INFO</a>
+                 <a href="{% url 'notice:main' %}">NOTICE</a>
+             </div>
+        <div id="footer" style="text-align: center; margin-top: 500px;">
+            <h6 style="font-size: 16px; font-weight: normal;">
+                Tel. 02-1234-5678
+                <p>Adr. Gangnam-gu, Seoul 1234</p>
+                <p>ⓒTRENDY. CopyRight Trendy</p>
+            </h6>
+        </div>
+    </div>
+    <div id="info-container" style="position: relative;">
+        <!--<div class="themeColor"></div>-->
+        <div id="contents" style="position: relative;">
+            <div id="topCon" style="background: white; width: 1578px; height: 111px;">
+                <h5>INFORMATION</h5>
+            </div>
+        <div id="infos">
+            <div id="info01" style="margin-left: 85px;">
+                <div class="themeColor"></div>
+                <img src="../search_2.png"
+                     style=" width: inherit; height: 45%;
+                     position: relative; top: 28px; object-fit: cover;">
+                <h3>If you search for a search
+                <br>term with a large amount
+                <br>of data, it provides the
+                <br>information you want.
+                <br></h3>
+                <h3 class="text01">
+                    많은 양의 데이터로 사용자가
+                    <br>검색하면 그에 걸맞는 정보를
+                    <br>제공 해주는 사이트 입니다.
+                </h3>
+            </div>
+            <div id="info02" style="margin-left: 27px;">
+                <div class="themeColor" style="background-color: #316396;"></div>
+                    <img src="../trend.jpg"
+                     style=" width: inherit; height: 45%;
+                     position: relative; top: 28px; object-fit: cover; opacity: 0.88;">
+                        <h3>It is a website that
+                        <br>provides information on
+                        <br>which trend is currently
+                        <br>based on Google Trends.
+                        <br></h3>
+                <h3 class="text01">
+                    Google Trend에서 제공하는
+                    <br>Trend를 기반으로 현재 Trend가
+                    <br>무엇인지 제공해주는 사이트 입니다.
+                </h3>
+            </div>
+            <div id="info03" style="margin-left: 27px; margin-right: 37px;">
+                <div class="themeColor" style="background-color: #6290be;"></div>
+                    <img src="../search_1.png"
+                     style=" width: inherit; height: 45%;
+                     position: relative; top: 28px; object-fit: cover; opacity: 0.8;">
+                     <h3>This site provides its own
+                     <br>trends based on 'Google
+                     <br>Trends' and the data that
+                     <br>users search for this site.
+                     <br>
+                     </h3>
+                <h3 class="text01">
+                    이 사이트 내의 사용자들이 자주
+                    <br>검색하는 데이터들의 기반으로
+                    <br>사이트 내의 Trend를 제공해주는
+                    <br>사이트 입니다.
+                </h3>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

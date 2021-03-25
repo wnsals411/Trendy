@@ -23,7 +23,7 @@ class QnaListView(ListView): # 게시글
     def get_queryset(self):
         search_keyword = self.request.GET.get('q', '')
         search_type = self.request.GET.get('type', '')
-        qna_list = Qna.objects.order_by('-id') 
+        qna_list = Qna.objects.order_by('-id')
 
         if search_keyword :
             if len(search_keyword) > 0 :    # 1글자 이상 검색 (변경시 get_context_data의 len(search_keyword)도 같이 변경)

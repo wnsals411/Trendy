@@ -28,4 +28,4 @@ class Qna(TimeStamedModel):
     password = models.CharField(max_length = 20) # 글 삭제시 필요한 비밀번호
 
     def __str__(self):
-        return self.title
+        return self.title   

@@ -1,64 +1,185 @@
-<a href="{% url 'notice:notice' %}"> 공지사항({{NotTotal}})</a>
-    <table cellspacing=1 width=700 border=1>
-    <tr>
-    <td width=50><p align=center>번호</p>
-    </td>
-    <td width=320><p align=center>제목</p>
-    </td>
-    <td width=100><p align=center>닉네임</p>
-    </td>
-    <td width=100><p align=center>등록일</p>
-    </td>
-    <td width=100><p align=center>조회수</p>
-    </td>
-    </tr>
-    
-    {% if NoticeList %}
-    <ul>
-    {% for notice in NoticeList %}
-    <tr>
-    <td width=50><p align=center><a href="{% url 'notice:notdet' notice.id %}">공지</a></p></td>
-    <td width=320><p align=center><a href="{% url 'notice:notdet' notice.id %}">{{ notice.title }}</a></p></td>
-    <td width=100><p align=center>관리자 </p></td>
-    <td width=100><p align=center>{{ notice.create_at|date:'Y. m. d' }}</p></td>
-    <td width=100><p align=center>{{ notice.hits }}</p></td>
-    </tr>
-    {% endfor %}
-    </ul>
-    {% else %}
-    <p>No Data.</p>
-    {% endif %}
-    </table>
-    ----------------------------------------------------------------------------------------------------------------------------------------
-</br><a href="{% url 'notice:qna' %}"> Q&A({{QnaTotal}})</a>
-    <table cellspacing=1 width=700 border=1>
-        <tr>
-        <td width=50><p align=center>번호</p>
-        </td>
-        <td width=320><p align=center>제목</p>
-        </td>
-        <td width=100><p align=center>닉네임</p>
-        </td>
-        <td width=100><p align=center>등록일</p>
-        </td>
-        <td width=100><p align=center>조회수</p>
-        </td>
-        </tr>
-
-    {% if QnaList %}
-    <ul>
-    {% for qna in QnaList %}
-    <tr>
-    <td width=50><p align=center><a href="{% url 'notice:qnadet' qna.id %}">{{ qna.id }}</a></p></td>
-    <td width=320><p align=center><a href="{% url 'notice:qnadet' qna.id %}">{{ qna.title }}</a></p></td>
-    <td width=100><p align=center>{{ qna.author }} </p></td>
-    <td width=100><p align=center>{{ qna.create_at|date:'Y. m. d' }}</p></td>
-    <td width=100><p align=center>{{ qna.hits }}</p></td>
-    </tr>
-    {% endfor %}
-    </ul>
-    {% else %}
-    <p>No Data.</p>
-    {% endif %}
-    </table>
-    <td><input type=button value="글쓰기" OnClick="window.location='/notice/write'"></td>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NOTICE</title>
+    <style>
+        body{
+            margin: 0 auto;
+        }
+        #wrap{
+            display: flex;
+        }
+        #nav{
+            min-width: 320px;
+            width: 372px;
+            flex-direction: column;
+            padding-left: 0;
+            background: #2b74bf;
+            font-size: 50px;
+            font-family: "Impact";
+            color: rgb(248, 243, 243);
+            z-index: 12;
+        }
+        #subnav {
+             font-size: 48px;
+             font-family: "KoreanSNMB";
+             color: rgb(248, 243, 243);
+        }
+        #topCon{
+             background: white;
+             width: 1578px;
+             height: 111px;
+        }
+        .themeColor {
+            color: rgba(255, 255, 255, 1);
+            height: 27px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            position: absolute;
+            width: inherit;
+        }
+        #noti-container h5{
+            font-size: 72px;
+            font-family: Impact;
+            color: rgb(43, 116, 191);
+            background: white;
+            margin-bottom: 0px;
+            margin-top: 64px;
+            margin-left: 633px;
+            letter-spacing: 14px;
+        }
+        #mainNo01, #mainNo02{
+            border-radius: 5px;
+            background-color: rgb(248, 243, 243);
+            box-shadow: 0px 10px 6.58px 0.42px rgba(0, 0, 0, 0.35);
+            width: 1500px;
+            height: 355px;
+            margin-left: 37px;
+        }
+    </style>
+    <style>
+        #nav h3{
+            margin: 0;
+            text-align: center;
+            padding-top: 40px;
+            letter-spacing: 8px;
+                }
+        #subnav h5:first-child {
+            padding-top: 20px;
+        }
+        #subnav h5 {
+            margin: 0;
+            text-align: center;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            letter-spacing: 5px;
+        }
+        #subnav a:first-child {
+            padding-top: 20px;
+            display: block;
+            font-size: 48px;
+            font-family: "KoreanSNMB";
+            color: rgb(248, 243, 243);
+            text-decoration: none;
+            }
+        #subnav a {
+            margin: 0;
+            text-align: center;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            letter-spacing: 5px;
+            display: block;
+            font-size: 48px;
+            font-family: "KoreanSNMB";
+            color: rgb(248, 243, 243);
+            text-decoration: none;
+            }
+        #susubnav h6{
+            margin: 0;
+            margin-left: 86px;
+            padding-top: 10px;
+            color: gray;
+            font-size: 31px;
+            font-family: NanumSquareround;
+        }
+    </style>
+    <style>
+        #selected{
+        background: #1c5294;
+        }
+        .thirdNav a, .thirdNav img {
+            background: #1c5294;
+            position: relative;
+        }
+        #susubnav {
+            clear: both;
+        }
+        .thirdNav a {
+            padding-top: 10px !important;
+        }
+        .thirdNav img {
+            vertical-align: middle;
+            position: absolute;
+            top: 30px;
+            right: 30px;
+        }
+        .qabtn{
+            position: relative;
+            margin-left: 1350px;
+            margin-top: 300px;
+            background: #c9cacb;
+            color: white;
+            font-family: NanumSquareround;
+            width: 107px;
+            border-radius: 5px;
+            height: 30px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<!-- 전체 페이지 -->
+<div id="wrap">
+    <!--좌측 네비게이션 : 파란색 -->
+    <div id="nav">
+        <h3>TRENDY</h3>
+             <div id="subnav">
+                 <a href="{% url 'main:main' %}" class="subNav01">MAIN</a>
+                 <a href="{% url 'info:main' %}" >INFO</a>
+                 <div class="thirdNav">
+                     <a href="{% url 'notice:main' %}" id="selected">NOTICE
+                        <img src="../down-arrow.png">
+                     </a>
+                 </div>
+             </div>
+                <div id="susubnav">
+                    <a href="{% url 'notice:notice' %}" class="susubNav01">Notice</a> <!--이곳-->
+                    <a href="{% url 'notice:qna' %}">Q&A</a>  <!--이곳-->
+                </div>
+        <div id="footer" style="text-align: center; margin-top: 500px;">
+            <h6 style="font-size: 16px; font-weight: normal;">
+                Tel. 02-1234-5678
+                <p>Adr. Gangnam-gu, Seoul 1234</p>
+                <p>ⓒTRENDY. CopyRight Trendy</p>
+            </h6>
+        </div>
+    </div>
+    <div id="noti-container">
+        <div id="contents" style="position: relative;">
+            <div id="topCon">
+                <h5>NOTICE</h5>
+            </div>
+        <div id="mainNotice">
+            <div id="mainNo01">
+                <div class="themeColor" style="background: #316396;"></div>
+            </div>
+            <div id="mainNo02" style="margin-top: 35px;">
+                <div class="themeColor" style="background: #86b1dd;">
+                <button class="qabtn" type="button" onclick="window.location='/notice/write'">글쓰기</button> 
+                
+                </div>
+            </div>
+        </div>
+</body>
+</html>

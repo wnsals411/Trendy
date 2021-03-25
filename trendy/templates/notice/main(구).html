@@ -1,0 +1,64 @@
+<a href="{% url 'notice:notice' %}"> 공지사항({{NotTotal}})</a>
+    <table cellspacing=1 width=700 border=1>
+    <tr>
+    <td width=50><p align=center>번호</p>
+    </td>
+    <td width=320><p align=center>제목</p>
+    </td>
+    <td width=100><p align=center>닉네임</p>
+    </td>
+    <td width=100><p align=center>등록일</p>
+    </td>
+    <td width=100><p align=center>조회수</p>
+    </td>
+    </tr>
+    
+    {% if NoticeList %}
+    <ul>
+    {% for notice in NoticeList %}
+    <tr>
+    <td width=50><p align=center><a href="{% url 'notice:notdet' notice.id %}">공지</a></p></td>
+    <td width=320><p align=center><a href="{% url 'notice:notdet' notice.id %}">{{ notice.title }}</a></p></td>
+    <td width=100><p align=center>관리자 </p></td>
+    <td width=100><p align=center>{{ notice.create_at|date:'Y. m. d' }}</p></td>
+    <td width=100><p align=center>{{ notice.hits }}</p></td>
+    </tr>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No Data.</p>
+    {% endif %}
+    </table>
+    ----------------------------------------------------------------------------------------------------------------------------------------
+</br><a href="{% url 'notice:qna' %}"> Q&A({{QnaTotal}})</a>
+    <table cellspacing=1 width=700 border=1>
+        <tr>
+        <td width=50><p align=center>번호</p>
+        </td>
+        <td width=320><p align=center>제목</p>
+        </td>
+        <td width=100><p align=center>닉네임</p>
+        </td>
+        <td width=100><p align=center>등록일</p>
+        </td>
+        <td width=100><p align=center>조회수</p>
+        </td>
+        </tr>
+
+    {% if QnaList %}
+    <ul>
+    {% for qna in QnaList %}
+    <tr>
+    <td width=50><p align=center><a href="{% url 'notice:qnadet' qna.id %}">{{ qna.id }}</a></p></td>
+    <td width=320><p align=center><a href="{% url 'notice:qnadet' qna.id %}">{{ qna.title }}</a></p></td>
+    <td width=100><p align=center>{{ qna.author }} </p></td>
+    <td width=100><p align=center>{{ qna.create_at|date:'Y. m. d' }}</p></td>
+    <td width=100><p align=center>{{ qna.hits }}</p></td>
+    </tr>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No Data.</p>
+    {% endif %}
+    </table>
+    <td><input type=button value="글쓰기" OnClick="window.location='/notice/write'"></td>

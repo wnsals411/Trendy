@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <style>
+        body {
+            margin: 0 auto;
+        }
+        #wrap {
+          display: flex;
+        }
+        #nav {
+        min-width: 320px;
+        width: 372px;
+        flex-direction: column;
+        padding-left: 0;
+        background: #2b74bf;
+        font-size: 50px;
+        font-family: "Impact";
+        color: rgb(248, 243, 243);
+        z-index: 12;
+        }
+        #subnav {
+          font-size: 48px;
+          font-family: "KoreanSNMB";
+          color: rgb(248, 243, 243);
+        }
+        #container {
+          background: #d8dfe5;
+        }
+        #topCon{
+          background: white;
+          width: 1578px;
+          height: 111px;
+        }
+        #search_btn{
+           position: absolute;
+           top: 0;
+           right: 0;
+           bottom: 0;
+           width: 42px;
+           background: blue;
+           border-radius: 5px;
+           cursor: pointer;
+           margin-right: 432px;
+           height: 35px;
+           margin-top: 35px;
+        }
+        .blind{
+            position: absolute;
+            clip: rect(0 0 0 0);
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+        }
+        .icon{
+           display: inline-block;
+           width: 15px;
+           height: 15px;
+           background-position: -204px -386px;
+           background-repeat: no-repeat;
+           vertical-align: top;
+        }
+        #mainCon {
+          background : #d8dfe5;
+        }
+        #live {
+          display: flex;
+          margin: 33px 33px;
+        }
+        #liveBox01, #liveBox02 {
+            background: white;
+            border-radius: 5px;
+            width: 723px;
+            height: 432px;
+            box-shadow: 0px 8px 12.35px 0.65px rgba(0, 0, 0, 0.35);
+            overflow:hidden;
+        }
+        table {
+            border-collapse: collapse;
+            border-color: #ccc;
+            }
+            th, td {
+                height: 45px;
+            }
+
+    </style>
+    <style>
+        #nav h3 {
+            margin: 0;
+            text-align: center;
+            padding-top: 40px;
+            letter-spacing: 8px;
+        }
+#subnav h5:first-child {
+    padding-top: 20px;
+}
+#subnav h5 {
+    margin: 0;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    letter-spacing: 5px;
+        }
+
+
+        #subnav a:first-child {
+        padding-top: 20px;
+        display: block;
+
+        font-size: 48px;
+        font-family: "KoreanSNMB";
+        color: rgb(248, 243, 243);
+        text-decoration: none;
+        }
+        #subnav a {
+        margin: 0;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        letter-spacing: 5px;
+        display: block;
+
+        font-size: 48px;
+        font-family: "KoreanSNMB";
+        color: rgb(248, 243, 243);
+        text-decoration: none;
+        }
+        #notice tr{
+            text-align: center;
+            font-family:NanumSquareRound;
+                }
+
+    </style>
+    <style>
+        #selected{
+            background: #1c5294;
+           }
+    </style>
+</head>
+<body>
+<!-- 전체 페이지 -->
+<div id="wrap">
+    <!--좌측 네비게이션 : 파란색 -->
+    <div id="nav">
+        <h3>TRENDY</h3>
+             <div id="subnav">
+                 <a href="{% url 'main:main' %}" class="subNav01" id="selected">MAIN</a>
+                 <a href="{% url 'info:main' %}">INFO</a>
+                 <a href="{% url 'notice:main' %}">NOTICE</a>
+             </div>
+        <div id="footer" style="text-align: center; margin-top: 500px;">
+            <h6 style="font-size: 16px; font-weight: normal;">
+                Tel. 02-1234-5678
+                <p>Adr. Gangnam-gu, Seoul 1234</p>
+                <p>ⓒTRENDY. CopyRight Trendy</p>
+            </h6>
+        </div>
+    </div>
+        <div id="container">
+            <div id="contents" style="position: relative;">
+                <div id="topCon"></div>
+                <input type="text" placeholder="검색어를 입력하세요." style="padding: 10px;border: 0;background: #d8dfe5;
+                width: 810px;text-align: center;margin: 0 auto;position: absolute;top: 35px;left: 20%;border-radius: 5px;">
+                <button id="search_btn">
+                    <span class="blind">검색</span>
+                    <span class="icon"></span>
+                </button>
+            </div>
+            <div id="mainCon">
+                <div id="live">
+                    <div id="liveBox01" style="margin-right: 56px;/* padding-top: 10px; *//* vertical-align: middle; */">
+                       <h3 style="text-align: center; font-size: 21px; color: #1a4b7e;">Google Trends</h3>
+                        <script type="text/javascript"
+                                src="https://ssl.gstatic.com/trends_nrtr/2431_RC04/embed_loader.js">
+                        </script>
+                        <script type="text/javascript">
+                        trends.embed.renderWidget("dailytrends", "", {"geo":"KR","guestPath":"https://trends.google.co.kr:443/trends/embed/"});
+                        </script>
+<!--                        <iframe id="trends-widget-1" title="trends-widget-1" src="https://trends.google.co.kr:443/trends/embed/dailytrends?geo=KR"
+                                width="100%" frameborder="0" scrolling="0" style="border-radius: 5px; box-shadow: rgba(0,0,0,0.12) 0px 0px 2px 0px, rgba(0,0,0,0.24) 0px 2px 2px 0px;
+                                height:361px;"></iframe>-->
+                    </div>
+                    <div id="liveBox02">
+                        <h2 class="text01">자체 제작 실검자리</h2>
+                    </div>
+                </div>
+                <div id="notice" style="
+    /* margin: 0 auto; */
+    background-color: white;
+    /* margin: 10px; */
+    padding: 20px;
+    border-radius: 5px;
+    margin: 33px 33px 0px 33px;
+    box-shadow: 0px 8px 12.35px 0.65px rgba(0, 0, 0, 0.35);
+">
+                    <h3 style="margin: 0 auto; color: #1a4b7e; font-size: 19pt;
+                    border-bottom: 2px solid #2b74bf;">NOTICE</h3>
+                    <table style ="width: 100%;">
+                        <tr style="border-bottom: 2px solid rgb(204, 204, 204);">
+                            <th>NO</th>
+                            <th>Title</th>
+                            <th>Writer</th>
+                            <th>Date</th>
+                        </tr>
+                        <!--td : 임시데이터 -> 백에서 연결 요청함.-->
+                        <tr style="border-bottom: 1px solid rgb(222, 217, 217);">
+                            <td>01</td>
+                            <td>[공지] 3월 초반 버그 개선 공지입니다.</td>
+                            <td>관리자</td>
+                            <td>2021.03.10</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgb(222, 217, 217);">
+                            <td>02</td>
+                            <td>[공지] 3월 예정 점검 일자 공지입니다.</td>
+                            <td>관리자</td>
+                            <td>2021.03.01</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgb(222, 217, 217);">
+                            <td>03</td>
+                            <td>[공지] 2월 후반 버그 개선 공지입니다.</td>
+                            <td>관리자</td>
+                            <td>2021.02.27</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgb(222, 217, 217);">
+                            <td>04</td>
+                            <td>[공지] 2월 초반 버그 개선 공지입니다.</td>
+                            <td>관리자</td>
+                            <td>2021.02.10</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
